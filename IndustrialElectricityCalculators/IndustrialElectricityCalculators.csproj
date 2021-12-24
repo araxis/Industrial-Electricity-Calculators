@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Arax.CalcEngine" Version="1.0.6" />
+    <PackageReference Include="Arax.Electricity.Parameters" Version="1.0.6" />
+    <PackageReference Include="Arax.SimpleResult" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="logo_Arax.png">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ReactivePowerCalculator\Type2\" />
+  </ItemGroup>
+
+</Project>
