@@ -9,6 +9,9 @@
     <PackageProjectUrl>https://github.com/araxis/Industrial-Electricity-Calculators</PackageProjectUrl>
     <RepositoryUrl>https://github.com/araxis/Industrial-Electricity-Calculators</RepositoryUrl>
     <PackageIcon>logo_Arax.png</PackageIcon>
+    <PackageId>Arax.Calculators.IEC</PackageId>
+    <Description>Industrial Electricity Calculators</Description>
+    <PackageTags>Arax;Electricity;Industrial;Calculator</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
