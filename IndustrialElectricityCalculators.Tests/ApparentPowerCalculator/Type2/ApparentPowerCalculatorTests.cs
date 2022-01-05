@@ -2,9 +2,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using IndustrialElectricityCalculators.ApparentPowerCalculator.Type2;
 using IndustrialElectricityUnits;
 using Moq;
+using SimpleResult;
 using Xunit;
 
 namespace IndustrialElectricityCalculators.Tests.ApparentPowerCalculator.Type2
@@ -26,12 +28,23 @@ namespace IndustrialElectricityCalculators.Tests.ApparentPowerCalculator.Type2
         [Theory]
         [InlineData(150,.86,174.419)]
         [InlineData(50,.85,58.824)]
-        public async Task CanCalcActivePower(double watt,  double cosPhi,double resultWatt)
+        public async Task CanCalcApparentPower(double watt,  double cosPhi,double resultValue)
         {
             var inputParam = new Param(watt.W(), cosPhi);
-            var result = await new Calculator().Calc(inputParam,default);
+            var expected = resultValue.VA();
 
-            result.Should().BeOfType<VoltAmpere>().Which.Value.Should().BeApproximately(resultWatt,.1);
+
+            var result = await new Calculator().Calc(inputParam, default);
+            var apparentPower = result.GetOrDefault();
+
+
+            using var scope = new AssertionScope();
+            apparentPower.Symbol
+                .Should()
+                .Be(expected.Symbol);
+            apparentPower.Value
+                .Should()
+                .BeApproximately(expected.Value,.1);
         }
 
       

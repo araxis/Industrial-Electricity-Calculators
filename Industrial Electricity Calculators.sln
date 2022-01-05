@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndustrialElectricityCalculators", "IndustrialElectricityCalculators\IndustrialElectricityCalculators.csproj", "{60E76FDB-6234-46A0-8003-45A0ABB2AEC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndustrialElectricityCalculators.Tests", "IndustrialElectricityCalculators.Tests\IndustrialElectricityCalculators.Tests.csproj", "{B165775B-3F1D-4898-BA7C-1AD8D171EC5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndustrialElectricityCalculators.Tests", "IndustrialElectricityCalculators.Tests\IndustrialElectricityCalculators.Tests.csproj", "{B165775B-3F1D-4898-BA7C-1AD8D171EC5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

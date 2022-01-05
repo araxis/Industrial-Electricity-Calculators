@@ -1,10 +1,10 @@
-﻿using CalculatorEngine;
-using IndustrialElectricityUnits;
+﻿using IndustrialElectricityUnits;
 using SimpleResult;
 
 namespace IndustrialElectricityCalculators.ReactivePowerCalculator.Type2;
 
-public class Calculator:SyncCalculator<Param,Result<ReactivePower>>
+public record Param(Power ActivePower, ApparentPower ApparentPower):IResultParam<ReactivePower>;
+public class Calculator:BaseCalculator<Param,ReactivePower>
 {
     protected override Result<ReactivePower> Calc(Param param)
     {
@@ -14,7 +14,7 @@ public class Calculator:SyncCalculator<Param,Result<ReactivePower>>
         var activePowerInW = (activePower ^ 2).ToWatt();
 
         if ( apparentPowerInVa < activePowerInW)
-            return new WrongParametersException("VA value must be greater W value");
+            return new CalculationException("VA value must be greater W value");
 
         VoltAmpereReactive powerInVar = Math.Sqrt(apparentPowerInVa - activePowerInW);
  

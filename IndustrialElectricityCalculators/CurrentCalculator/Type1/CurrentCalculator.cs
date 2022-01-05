@@ -1,12 +1,15 @@
 ﻿using Ardalis.GuardClauses;
-using CalculatorEngine;
 using IndustrialElectricityUnits;
+using SimpleResult;
 
 namespace IndustrialElectricityCalculators.CurrentCalculator.Type1;
-
-public class CurrentCalculator:SyncCalculator<Param,Current>
+public record Param(Power Power, Voltage Voltage, CosPhi CosPhi, Efficiency Efficiency, PowerSystem System) : IResultParam<Current>
 {
-    protected override Current Calc(Param param)
+   
+}
+public class CurrentCalculator:BaseCalculator<Param,Current>
+{
+    protected override Result<Current> Calc(Param param)
     {
         Guard.Against.Null(param, nameof(param));
 

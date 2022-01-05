@@ -1,12 +1,13 @@
 ﻿using Ardalis.GuardClauses;
-using CalculatorEngine;
 using IndustrialElectricityUnits;
+using SimpleResult;
 
 namespace IndustrialElectricityCalculators.ReactivePowerCalculator.Type1;
 
-public class Calculator :SyncCalculator<Param,ReactivePower>
+public record Param(Current Current, Voltage Voltage, CosPhi CosPhi, PowerSystem System):IResultParam<ReactivePower>;
+public class Calculator :BaseCalculator<Param,ReactivePower>
 {
-    protected override ReactivePower Calc(Param param)
+    protected override Result<ReactivePower> Calc(Param param)
     {
 
         Guard.Against.Null(param, nameof(param));

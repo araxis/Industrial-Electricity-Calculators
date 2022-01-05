@@ -5,8 +5,8 @@ using FluentAssertions;
 using IndustrialElectricityCalculators.ActivePowerCalculator.Type1;
 using IndustrialElectricityUnits;
 using Moq;
+using SimpleResult;
 using Xunit;
-using Type1Calc =IndustrialElectricityCalculators.ActivePowerCalculator.Type1;
 
 namespace IndustrialElectricityCalculators.Tests.ActivePowerCalculator.Type1
 {
@@ -14,12 +14,11 @@ namespace IndustrialElectricityCalculators.Tests.ActivePowerCalculator.Type1
     public class ActivePowerCalculatorTests
     {
         [Fact]
-
         public void CalcMethodNotAllowNullParameter()
         {
             Param inputParam = null;
 
-            var sut = new Type1Calc.ActivePowerCalculator();
+            var sut = new Calculator();
 
             var result =async ()=>await sut.Calc(inputParam,It.IsAny<CancellationToken>());
             result.Should().ThrowAsync<ArgumentNullException>();
@@ -31,9 +30,15 @@ namespace IndustrialElectricityCalculators.Tests.ActivePowerCalculator.Type1
         public async Task CanCalcThreePhaseSystemActivePower(double voltage,double ampere,  double cosPhi,double resultWatt)
         {
             var inputParam = new Param(voltage,ampere.A(), cosPhi,PowerSystem.ThreePhase);
-            var result = await new Type1Calc.ActivePowerCalculator().Calc(inputParam,default);
+            var expected = resultWatt.W();
 
-            result.Should().BeOfType<Watt>().Which.Value.Should().BeApproximately(resultWatt,.1);
+            var result = await new Calculator().Calc(inputParam,default);
+            var watt = result.GetOrDefault();
+
+            watt.Unit.Should().Be(expected.Unit);
+            watt.Value.Should().BeApproximately(watt.Value, .1);
+
+        
         }
 
         [Theory]
@@ -43,9 +48,13 @@ namespace IndustrialElectricityCalculators.Tests.ActivePowerCalculator.Type1
         {
             var inputParam = new Param(voltage,ampere.A(), cosPhi,PowerSystem.SinglePhase);
 
-            var result = await new Type1Calc.ActivePowerCalculator().Calc(inputParam, default);
+            var result = await new Calculator().Calc(inputParam, default);
 
-            result.Should().BeOfType<Watt>().Which.Value.Should().BeApproximately(resultWatt, .1);
+            result.Should().BeOfType<Result<Power>>()
+                .Which
+                .GetOrDefault().Value
+                .Should()
+                .BeApproximately(resultWatt, .1);
         }
     }
 }

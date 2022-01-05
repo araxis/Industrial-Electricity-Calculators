@@ -4,12 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Authors>Meisam Alifallahi</Authors>
+    <Copyright>Copyright Meisam Alifallahi</Copyright>
+    <PackageProjectUrl>https://github.com/araxis/Industrial-Electricity-Calculators</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/araxis/Industrial-Electricity-Calculators</RepositoryUrl>
+    <PackageIcon>logo_Arax.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Arax.CalcEngine" Version="1.0.6" />
     <PackageReference Include="Arax.Electricity.Parameters" Version="1.0.6" />
-    <PackageReference Include="Arax.SimpleResult" Version="1.0.1" />
+    <PackageReference Include="Arax.SimpleResult" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +26,8 @@
 
   <ItemGroup>
     <Folder Include="ReactivePowerCalculator\Type2\" />
+    <Folder Include="VoltageCalculator\Type3\" />
+    <Folder Include="VoltageCalculator\Type1\" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using IndustrialElectricityCalculators.ReactivePowerCalculator.Type2;
 using IndustrialElectricityUnits;
 using Xunit;
@@ -16,12 +17,15 @@ namespace IndustrialElectricityCalculators.Tests.ReactivePowerCalculator.Type2
         {
             var inputParam = new Param(50.W(),150.VA());
           
-            var expectedResult = 141.421.VAr();
+            var expected = 141.421.VAr();
             var result = await new Calculator().Calc(inputParam,default);
+            var resultValue = result.GetOrDefault();
 
-            result.GetOrDefault().Should().BeOfType<VoltAmpereReactive>()
+            resultValue.Should()
+                .BeOfType<VoltAmpereReactive>()
                 .Which
-                .Value.Should().BeApproximately(expectedResult.Value,.1);
+                .Value.Should()
+                .BeApproximately(expected.Value,.1);
         }
 
         [Fact]

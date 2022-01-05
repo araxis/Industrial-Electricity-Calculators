@@ -5,8 +5,8 @@ using FluentAssertions;
 using IndustrialElectricityCalculators.ActivePowerCalculator.Type2;
 using IndustrialElectricityUnits;
 using Moq;
+using SimpleResult;
 using Xunit;
-using Type1Calc =IndustrialElectricityCalculators.ActivePowerCalculator.Type2;
 
 namespace IndustrialElectricityCalculators.Tests.ActivePowerCalculator.Type2
 {
@@ -18,7 +18,7 @@ namespace IndustrialElectricityCalculators.Tests.ActivePowerCalculator.Type2
         {
             Param inputParam = null;
 
-            var sut = new Type1Calc.ActivePowerCalculator();
+            var sut = new Calculator();
 
             var result =async ()=>await sut.Calc(inputParam,It.IsAny<CancellationToken>());
             result.Should().ThrowAsync<ArgumentNullException>();
@@ -30,9 +30,12 @@ namespace IndustrialElectricityCalculators.Tests.ActivePowerCalculator.Type2
         public async Task CanCalcActivePower(double va,  double cosPhi,double resultWatt)
         {
             var inputParam = new Param(va.VA(), cosPhi);
-            var result = await new Type1Calc.ActivePowerCalculator().Calc(inputParam,default);
+            var result = await new Calculator().Calc(inputParam,default);
 
-            result.Should().BeOfType<Watt>().Which.Value.Should().BeApproximately(resultWatt,.1);
+            result.Should().BeOfType<Result<Power>>()
+                .Which
+                .GetOrDefault().Value
+                .Should().BeApproximately(resultWatt,.1);
         }
 
       

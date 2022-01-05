@@ -31,8 +31,12 @@ namespace IndustrialElectricityCalculators.Tests.CurrentCalculator.Type1
         {
             var inputParam = new Param(kw.Kw(),voltage,coaPhi,efficiency,PowerSystem.ThreePhase);
             var result = await new Type1Calc.CurrentCalculator().Calc(inputParam,default);
-
-            result.Should().BeOfType<Ampere>().Which.Value.Should().BeApproximately(resultAmpere,.1);
+            var resultValue = result.GetOrDefault();
+            resultValue.Should()
+                .BeOfType<Ampere>()
+                .Which
+                .Value.Should()
+                .BeApproximately(resultAmpere,.1);
         }
 
         [Theory]
@@ -43,8 +47,13 @@ namespace IndustrialElectricityCalculators.Tests.CurrentCalculator.Type1
             var inputParam = new Param(kw.Kw(),voltage,coaPhi,efficiency,PowerSystem.SinglePhase);
 
             var result = await new Type1Calc.CurrentCalculator().Calc(inputParam,default);
-           
-            result.Should().BeOfType<Ampere>().Which.Value.Should().BeApproximately(resultAmpere,.1);
+
+            var resultValue = result.GetOrDefault();
+            resultValue.Should()
+                .BeOfType<Ampere>()
+                .Which
+                .Value.Should()
+                .BeApproximately(resultAmpere,.1);
         }
     }
 }

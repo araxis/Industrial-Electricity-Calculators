@@ -4,9 +4,9 @@ using SimpleResult;
 
 namespace IndustrialElectricityCalculators.ActivePowerCalculator.Type4;
 
+public record Param(ApparentPower ApparentPower, ReactivePower ReactivePower):IResultParam<Power>;
 
-
-public class ActivePowerCalculator:SyncCalculator<Param,Result<Power>>
+public class Calculator:BaseCalculator<Param,Power>
 {
     protected override Result<Power> Calc(Param param)
     {
@@ -16,7 +16,7 @@ public class ActivePowerCalculator:SyncCalculator<Param,Result<Power>>
         var apparentPowerInVa = (apparentPower ^ 2).ToVA();
 
         if (apparentPowerInVa < reactivePowerInVar)
-            return new WrongParametersException("VA value must be greater VAr value");
+            return new CalculationException("VA value must be greater VAr value");
 
         Watt powerInWatt = Math.Sqrt(apparentPowerInVa - reactivePowerInVar);
  

@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using IndustrialElectricityCalculators.CurrentCalculator.Type2;
 using IndustrialElectricityUnits;
 using Moq;
@@ -31,8 +32,12 @@ namespace IndustrialElectricityCalculators.Tests.CurrentCalculator.Type2
         {
             var inputParam = new Param(new KiloVoltAmpere(kVA), voltage,PowerSystem.ThreePhase);
             var result = await new Type2Calc.CurrentCalculator().Calc(inputParam,default);
-
-            result.Should().BeOfType<Ampere>().Which.Value.Should().BeApproximately(resultAmpere,.1);
+            var resultValue = result.GetOrDefault();
+            resultValue.Should()
+                .BeOfType<Ampere>()
+                .Which
+                .Value.Should()
+                .BeApproximately(resultAmpere,.1);
         }
 
         [Theory]
@@ -42,9 +47,14 @@ namespace IndustrialElectricityCalculators.Tests.CurrentCalculator.Type2
         {
             var inputParam = new Param(new KiloVoltAmpere(kVA), voltage, PowerSystem.SinglePhase);
 
-            var result = await new Type2Calc.CurrentCalculator().Calc(inputParam, default);
 
-            result.Should().BeOfType<Ampere>().Which.Value.Should().BeApproximately(resultAmpere, .1);
+            var result = await new Type2Calc.CurrentCalculator().Calc(inputParam, default);
+            var resultValue = result.GetOrDefault();
+            resultValue.Should()
+                .BeOfType<Ampere>()
+                .Which
+                .Value.Should()
+                .BeApproximately(resultAmpere,.1);
         }
     }
 }
