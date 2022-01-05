@@ -17,6 +17,16 @@ Or via the .NET Core command line interface:
 
     dotnet add package Arax.Calculators.IEC
 
+## Add to ServiceCollection
+
+```csharp
+   //add CalcEngine
+   builder.Services.AddCalculator();
+
+   //to add calculators 
+   builder.Services.AddIndustrialElectricityCalculators();
+```
+
 ## Calculators
 
 *   Active Power ( x4 )
