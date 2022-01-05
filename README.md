@@ -26,7 +26,20 @@ Or via the .NET Core command line interface:
    //to add calculators 
    builder.Services.AddIndustrialElectricityCalculators();
 ```
-
+## Use: inject ICalcEngine & use
+ ```csharp
+  private readonly ICalcEngine _calcEngine;
+  ...
+    private async Task<Result<Current>> CalcCurrent()
+    {
+        var power = 12.W();
+        var voltage = 415;
+        var cosPhi = .9;
+        var efficiency = 90;
+        var powerSystem = PowerSystem.ThreePhase;
+        return await _calcEngine.CalcCurrent(power, voltage, cosPhi, efficiency, powerSystem);
+    }
+ ```
 ## Calculators
 
 *   Active Power ( x4 )
