@@ -1,4 +1,7 @@
 # Industrial-Electricity-Calculators
+[![.NET](https://github.com/araxis/Industrial-Electricity-Calculators/actions/workflows/dotnet.yml/badge.svg)](https://github.com/araxis/Industrial-Electricity-Calculators/actions/workflows/dotnet.yml)
+[![NuGet](https://img.shields.io/nuget/vpre/Arax.Calculators.IEC.svg)](https://www.nuget.org/packages/Arax.Calculators.IEC)
+[![NuGet](https://img.shields.io/nuget/dt/Arax.Calculators.IEC.svg)](https://www.nuget.org/packages/Arax.Calculators.IEC) 
 
 this library contains Industrial Electricity related calculators.
 
