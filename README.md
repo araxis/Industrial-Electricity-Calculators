@@ -23,7 +23,7 @@ Or via the .NET Core command line interface:
    //add CalcEngine
    builder.Services.AddCalculator();
 
-   //to add calculators 
+   //add calculators 
    builder.Services.AddIndustrialElectricityCalculators();
 ```
 ## Use: inject ICalcEngine & use
