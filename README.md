@@ -10,3 +10,4 @@ it is implemented based on [CalculatorEngine](https://github.com/araxis/Calculat
 *   Apparent Power ( x3 )
 *   Reactive Power ( x2 )
 *   Current ( x2 )
+*   Voltage ( x3)
